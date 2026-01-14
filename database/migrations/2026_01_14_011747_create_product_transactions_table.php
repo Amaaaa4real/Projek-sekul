@@ -26,7 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger(column: 'sub_total_amount');
             $table->unsignedBigInteger(column: 'grand_total_amount');
             $table->boolean(column: 'is_paid');
-            $table->foreignId(column: 'shoe_id')->constrained()->cascadeOnDelete();
+            $table->foreignId(column: 'produk_id')->constrained()->cascadeOnDelete();
             $table->foreignId(column: 'promo_code_id')->nullable()->constrained()->nullOnDelete();
             $table->softDeletes();
             $table->timestamps();

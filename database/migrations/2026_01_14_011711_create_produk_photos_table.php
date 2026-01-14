@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('produk_photos', function (Blueprint $table) {
             $table->id();
             $table->string(column: 'photo');
-            $table->foreignId(column: 'shoe_id')->constrained()->cascadeOnDelete();
+            $table->foreignId(column: 'produk_id')->constrained()->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });
