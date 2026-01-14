@@ -11,24 +11,24 @@ class Category extends Model
 
 {
 
-    // use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes;
 
-    // protected $fillable = [
-    //     'name',
-    //     'slug',
-    //     'icon',
-    // ];
+    protected $fillable = [
+        'name',
+        'slug',
+        'icon',
+    ];
 
-    // public function produks(): HasMany
-    // {
-    //     return $this->hasMany(related: Produk::class);
-    // }
+    public function produks(): HasMany
+    {
+        return $this->hasMany(related: Produk::class);
+    }
 
-    // public function setNameAttribute($value): void
-    // {
-    //     $this->attributes['name'] = $value;
-    //     $this->attributes['slug'] = Str::slug(title: $value);
-    // }
+    public function setNameAttribute($value): void
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = String::slug(title: $value);
+    }
 
 }
 
