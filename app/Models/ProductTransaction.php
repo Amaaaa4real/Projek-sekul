@@ -18,7 +18,7 @@ class ProductTransaction extends Model
         'booking_trx_id',
         'city',
         'post_code',
-        'adress',
+        'address',
         'quantity',
         'sub_total_amount',
         'grand_total_amount',
@@ -26,6 +26,7 @@ class ProductTransaction extends Model
         'is_paid',
         'produk_id',
         'produk_size',
+        'shoe_size',
         'promo_code_id',
         'proof',
     ];

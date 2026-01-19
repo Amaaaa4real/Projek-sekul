@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources\ProductTransactions\Tables;
 
+use Filament\Tables\Table;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
-use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\TrashedFilter;
-use Filament\Tables\Table;
+use Filament\Actions\ForceDeleteBulkAction;
 
 class ProductTransactionsTable
 {
@@ -19,38 +20,38 @@ class ProductTransactionsTable
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('name')->label('Nama')
                     ->searchable(),
-                TextColumn::make('phone')
+                TextColumn::make('phone')->label('No Telp')
                     ->searchable(),
                 TextColumn::make('email')
-                    ->label('Email address')
+                    ->label('Alamat Email')
                     ->searchable(),
-                TextColumn::make('booking_trx_id')
+                TextColumn::make('booking_trx_id')->label('ID')
                     ->searchable(),
-                TextColumn::make('city')
+                TextColumn::make('city')->label('Kota')
                     ->searchable(),
-                TextColumn::make('post_code')
+                TextColumn::make('post_code')->label('Kode Pos')
                     ->searchable(),
-                TextColumn::make('proof')
+                ImageColumn::make('proof')->label('Bukti')
                     ->searchable(),
-                TextColumn::make('shoe_size')
+                TextColumn::make('shoe_size')->label('Ukuran Sepatu')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('quantity')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('sub_total_amount')
+                TextColumn::make('sub_total_amount')->label('Sub Total')
                     ->numeric()
                     ->sortable(),
-                TextColumn::make('grand_total_amount')
+                TextColumn::make('grand_total_amount')->label('Grand Total')
                     ->numeric()
                     ->sortable(),
-                IconColumn::make('is_paid')
+                IconColumn::make('is_paid')->label('Terbayar')
                     ->boolean(),
-                TextColumn::make('produk.name')
+                TextColumn::make('produk.name')->label('Nama Produk')
                     ->searchable(),
-                TextColumn::make('promoCode.id')
+                TextColumn::make('promoCode.id')->label('Kode Promo')
                     ->searchable(),
                 TextColumn::make('deleted_at')
                     ->dateTime()
