@@ -20,6 +20,7 @@ class Produk extends Model
         'slug',
         'thumbnail',
         'about',
+        'price',
         'stock',
         'is_popular',
         'category_id',
