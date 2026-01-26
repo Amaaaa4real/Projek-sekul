@@ -2,15 +2,16 @@
 
 namespace App\Filament\Resources\PromoCodes\Tables;
 
+use Filament\Tables\Table;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\EditAction;
-use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
-use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
-use Filament\Tables\Table;
+use Filament\Actions\ForceDeleteBulkAction;
 
 class PromoCodesTable
 {
@@ -21,7 +22,7 @@ class PromoCodesTable
                 TextColumn::make('code')->label('Kode Promo')
                     ->searchable(),
                 TextColumn::make('discount_amount')->label('Potongan Harga')
-                    ->numeric()
+                    ->money('IDR')
                     ->sortable(),
                 TextColumn::make('deleted_at')
                     ->dateTime()
@@ -40,8 +41,14 @@ class PromoCodesTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ActionGroup::make([
+                    // Array of actions
+                    ViewAction::make(),          // Lihat detail
+                    EditAction::make(),          // Edit data        // Soft delete
+                ])
+                     ->dropdownPlacement('top-start')
+
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

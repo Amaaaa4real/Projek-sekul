@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Brands\Tables;
 use Filament\Tables\Table;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
@@ -20,7 +21,7 @@ class BrandsTable
         return $table
             ->columns([
                 TextColumn::make('name')->label('Nama Brand')->searchable(),
-                ImageColumn::make('logo'),
+                ImageColumn::make('logo')->label('Logo')->circular(),
                 TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
@@ -38,8 +39,14 @@ class BrandsTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ActionGroup::make([
+                    // Array of actions
+                    ViewAction::make(),          // Lihat detail
+                    EditAction::make(),          // Edit data     // Soft delete
+                ])
+                    ->dropdownPlacement('top-start')
+
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

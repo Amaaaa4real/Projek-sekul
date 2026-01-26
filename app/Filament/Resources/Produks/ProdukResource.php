@@ -120,8 +120,7 @@ class ProdukResource extends Resource
     {
         return [
             'index' => ListProduks::route('/'),              // Halaman daftar produk (URL: /)
-            'create' => CreateProduk::route('/create'),       // Halaman tambah produk (URL: /create)
-            'view' => ViewProduk::route('/{record}'),         // Halaman lihat detail (URL: /123)
+            'create' => CreateProduk::route('/create'),       // Halaman tambah produk (URL: /create)        // Halaman lihat detail (URL: /123)
             'edit' => EditProduk::route('/{record}/edit'),    // Halaman edit produk (URL: /123/edit)
         ];
     }

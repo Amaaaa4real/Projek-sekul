@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProductTransaction extends Model
 {
@@ -26,7 +28,7 @@ class ProductTransaction extends Model
         'is_paid',
         'produk_id',
         'produk_size',
-        'shoe_size',
+        'produk_size',
         'promo_code_id',
         'proof',
     ];
@@ -48,5 +50,33 @@ class ProductTransaction extends Model
     public function promoCode(): BelongsTo
     {
         return $this->belongsTo(related: PromoCode::class, foreignKey: 'promo_code_id');
+    }
+
+    /* =========================
+     | STOCK HANDLING
+     ========================= */
+    protected static function booted()
+    {
+        static::creating(function (ProductTransaction $transaction) {
+
+            DB::transaction(function () use ($transaction) {
+
+                $produk = Produk::lockForUpdate()->find($transaction->produk_id);
+
+                if (! $produk) {
+                    throw new \Exception('Produk tidak ditemukan');
+                }
+
+                //  VALIDASI STOK
+                if ($transaction->quantity > $produk->stock) {
+                    throw ValidationException::withMessages([
+                 'quantity' => 'Stok produk tidak mencukupi',
+                 ]);
+                }
+
+                //  KURANGI STOK
+                $produk->decrement('stock', $transaction->quantity);
+            });
+        });
     }
 }

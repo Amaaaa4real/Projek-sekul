@@ -112,8 +112,7 @@ class BrandResource extends Resource
     {
         return [
             'index' => ListBrands::route('/'),              // Halaman list/index di route '/'
-            'create' => CreateBrand::route('/create'),       // Halaman create di route '/create'
-            'view' => ViewBrand::route('/{record}'),         // Halaman view detail di route '/{record}'
+            'create' => CreateBrand::route('/create'),       // Halaman create di route '/create'       // Halaman view detail di route '/{record}'
             'edit' => EditBrand::route('/{record}/edit'),    // Halaman edit di route '/{record}/edit'
         ];
     }

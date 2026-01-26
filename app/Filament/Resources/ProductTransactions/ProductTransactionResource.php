@@ -53,7 +53,6 @@ class ProductTransactionResource extends Resource
         return [
             'index' => ListProductTransactions::route('/'),
             'create' => CreateProductTransaction::route('/create'),
-            'view' => ViewProductTransaction::route('/{record}'),
             'edit' => EditProductTransaction::route('/{record}/edit'),
         ];
     }

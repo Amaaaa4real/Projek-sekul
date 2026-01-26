@@ -21,7 +21,7 @@ class ProductTransactionInfolist
                 TextEntry::make('city'),
                 TextEntry::make('post_code'),
                 TextEntry::make('proof'),
-                TextEntry::make('shoe_size')
+                TextEntry::make('produk_size')
                     ->numeric(),
                 TextEntry::make('address')
                     ->columnSpanFull(),
@@ -40,7 +40,7 @@ class ProductTransactionInfolist
                     ->placeholder('-'),
                 TextEntry::make('deleted_at')
                     ->dateTime()
-                    ->visible(fn (ProductTransaction $record): bool => $record->trashed()),
+                    ->visible(fn(ProductTransaction $record): bool => $record->trashed()),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

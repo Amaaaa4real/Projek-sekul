@@ -2,10 +2,11 @@
 
 namespace App\Filament\Resources\Categories\Tables;
 
-use Filament\Actions\DeleteAction;
 use Filament\Tables\Table;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Actions\ActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\RestoreBulkAction;
@@ -27,8 +28,14 @@ class CategoriesTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                EditAction::make(),
-                DeleteAction::make(),
+                ActionGroup::make([
+                    // Array of actions
+                    EditAction::make(),          // Edit data
+                    DeleteAction::make(),        // Soft delete
+                ])
+                    ->dropdownPlacement('top-start')
+
+
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

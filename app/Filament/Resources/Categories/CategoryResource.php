@@ -120,7 +120,6 @@ class CategoryResource extends Resource
         return [
             'index' => ListCategories::route('/'),           // Halaman list/index di route '/'
             'create' => CreateCategory::route('/create'),     // Halaman create di route '/create'
-            'view' => ViewCategory::route('/{record}'),       // Halaman view detail di route '/{record}'
             'edit' => EditCategory::route('/{record}/edit'),  // Halaman edit di route '/{record}/edit'
         ];
     }

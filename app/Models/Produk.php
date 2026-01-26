@@ -2,14 +2,12 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-
 
 class Produk extends Model
 {
@@ -27,29 +25,49 @@ class Produk extends Model
         'brand_id',
     ];
 
+    /* =========================
+     | AUTO SLUG
+     ========================= */
     public function setNameAttribute($value): void
     {
         $this->attributes['name'] = $value;
-        $this->attributes['slug'] = Str::slug(title: $value);
+        $this->attributes['slug'] = Str::slug($value);
     }
 
+    /* =========================
+     | RELATIONS
+     ========================= */
     public function brand(): BelongsTo
     {
-        return $this->belongsTo(related: Brand::class, foreignKey: 'brand_id');
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
     public function category(): BelongsTo
     {
-        return $this->belongsTo(related: Category::class, foreignKey: 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function photos(): HasMany
     {
-        return $this->hasMany(related: ProdukPhoto::class);
+        return $this->hasMany(ProdukPhoto::class, 'produk_id');
     }
 
     public function sizes(): HasMany
     {
-        return $this->hasMany(related: ProdukSize::class);
+        return $this->hasMany(ProdukSize::class, 'produk_id');
+    }
+
+    /* =========================
+     | CASCADE DELETE PHOTOS
+     ========================= */
+    protected static function booted()
+    {
+        static::deleting(function ($produk) {
+            if ($produk->isForceDeleting()) {
+                $produk->photos()->forceDelete();
+            } else {
+                $produk->photos()->delete();
+            }
+        });
     }
 }

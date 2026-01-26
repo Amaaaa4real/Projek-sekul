@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string(column: 'booking_trx_id');
             $table->string(column: 'city');
             $table->string(column: 'post_code');
-            $table->string(column: 'proof');
-            $table->unsignedBigInteger(column: 'shoe_size');
+            $table->string(column: 'proof')->nullable();
+            $table->unsignedBigInteger(column: 'produk_size');
             $table->text(column: 'address');
             $table->unsignedBigInteger(column: 'quantity');
             $table->unsignedBigInteger(column: 'sub_total_amount');

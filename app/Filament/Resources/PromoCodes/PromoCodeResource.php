@@ -121,7 +121,6 @@ class PromoCodeResource extends Resource
         return [
             'index' => ListPromoCodes::route('/'),            // Halaman daftar kode promo (URL: /)
             'create' => CreatePromoCode::route('/create'),     // Halaman tambah kode promo (URL: /create)
-            'view' => ViewPromoCode::route('/{record}'),       // Halaman lihat detail (URL: /DISKON50)
             'edit' => EditPromoCode::route('/{record}/edit'),  // Halaman edit kode promo (URL: /DISKON50/edit)
         ];
     }
